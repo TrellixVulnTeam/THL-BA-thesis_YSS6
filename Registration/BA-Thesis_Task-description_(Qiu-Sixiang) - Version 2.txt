@@ -1,0 +1,7 @@
+Description:
+As the development of E-sports these years, the importance of daticist and coach has gradually been accepted by audience some of which are also the players of the game. Then comes the question whether same technology can also been applied in order to improve the outcome or in-game experience of normal players. By collecting data of previous game fight, it is feasible to train an AI which is sensitive to the lineup of two teams. After packaging and injecting it into a website with friendly visualization, it would help users on the pick of their champion and possible strategy towards the game.
+
+Tasks:
+- Collection of previous data of game fight.
+- Traning of AI with Machine Learning technology.
+- Injecting the AI into a website with friendly visualization.

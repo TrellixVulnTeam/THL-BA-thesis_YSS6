@@ -1,0 +1,7 @@
+Descripition:
+These years, MOBA(Multi-player online battle arena) as a game type is becoming increasingly popular among crowds over the world. Due to its high level of competitiveness, it also radiates side industry like application of data analysis and in-game evaluation, prediciton which helps players to win the game one step ahead. This thesis aims to focus on data analysis and helping tips before the game has started. By collecting data of previous game fight, an AI would be trained sensitive to the lineup of two teams. After packaging and injecting it into a website with friendly visualization, it would be able to coach its users the recommended pick of champion and possible strategy towards the game.
+
+Tasks:
+- Collection of previous data of game fight.
+- Traning of AI with Machine Learning technology.
+- Injecting the AI into a website with friendly visualization.

@@ -16,10 +16,10 @@ function saveData() {
 function predict() {
     //console.log(picks);
     $.ajax({
-        url: "/prediction",
-        type: "GET",
-        data: picks,
-        dataType: 'JSON',
+        url: "/prediction/",
+        type: "POST",
+        data: JSON.stringify(picks),
+        contentType: 'application/json',
         success: function (res) {
             alert(res)
         }

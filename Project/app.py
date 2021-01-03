@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, request
-import json
 
 app = Flask(__name__,static_folder='./static')
 
@@ -7,6 +6,7 @@ app = Flask(__name__,static_folder='./static')
 def demo():
     return render_template("demo.html")
 
-@app.route('/prediction')
+@app.route('/prediction/',methods=['POST'])
 def dataHandler():
+    print(request.json)
     return 'hello world'

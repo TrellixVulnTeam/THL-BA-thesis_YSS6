@@ -10,3 +10,5 @@ def demo():
 def dataHandler():
     print(request.json)
     return 'hello world'
+
+app.run()

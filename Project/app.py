@@ -11,4 +11,5 @@ def dataHandler():
     print(request.json)
     return 'hello world'
 
-app.run()
+if __name__ == "__main__":
+    app.run()

@@ -1,8 +1,7 @@
 from flask import Flask, render_template, url_for, request
-import numpy as np
 from itertools import product
+import numpy as np
 import pickle
-
 
 app = Flask(__name__,static_folder='./static')
 
@@ -10,7 +9,7 @@ app = Flask(__name__,static_folder='./static')
 # currently we just put the loading, and preparing stuff here, for convenience.
 # later we will move this to a model load api to handle different kinds of models
 # load model
-model_path = 'C:/Users/qsxqs/Documents/GitHub/THL-BA-thesis/Project/model/lr_model_top10_combine_without_ban.pkl'
+model_path = './project/model/lr_model_top10_combine_without_ban.pkl'
 lr_model_without_ban = pickle.load(open(model_path, 'rb'))
 
 # hero combine list we used during training time, as part of features.

@@ -1,6 +1,7 @@
 var picks = new Array();
 
 function saveData() {
+    picks = []
     picks.push(document.getElementById("pick_0").value);
     picks.push(document.getElementById("pick_1").value);
     picks.push(document.getElementById("pick_2").value);

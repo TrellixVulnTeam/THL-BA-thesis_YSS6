@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
+from utils import load_site_config, load_hero_mapping, load_pretrained_model, valid_input, data_to_feature
+from utils import combine_list, hero_ids
 from itertools import product
 import numpy as np
 import pickle
@@ -6,63 +8,13 @@ import pickle
 app = Flask(__name__,static_folder='./static')
 
 
-# currently we just put the loading, and preparing stuff here, for convenience.
-# later we will move this to a model load api to handle different kinds of models
-# load model
-model_path = './project/model/lr_model_top10_combine_without_ban.pkl'
-lr_model_without_ban = pickle.load(open(model_path, 'rb'))
-
-# hero combine list we used during training time, as part of features.
-combine_list = [(86, 8), (86, 96), (86, 106), (51, 11), (91, 19), (91, 72), (86, 11), (86, 39), (86, 17), (86, 46)]
-hero_ids = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,119,120,121,126,128,129]
-
-
-def data_to_feature(raw_data):
-    data_dim = len(raw_data)
-    if not data_dim in [10, 20]:
-        return None
-    elif data_dim == 10:
-        # generate hero combine
-        team0_combine = list(product(raw_data[:5], raw_data[:5]))
-        team1_combine = list(product(raw_data[5:], raw_data[5:]))
-        feature = np.zeros(len(hero_ids) + 2 * len(combine_list))
-        for i, hero_id in enumerate(hero_ids):
-            if hero_id in raw_data[:5]:
-                feature[i] = 1
-            elif hero_id in raw_data[5:]:
-                feature[i] = -1
-        for i, hero_combine in enumerate(combine_list):
-            if hero_combine in team0_combine:
-                feature[i + len(hero_ids)] = 1
-            elif hero_combine in team1_combine:
-                feature[i + len(hero_ids) + len(combine_list)] = 1
-        return feature.reshape(1, -1)
-    else:
-        # TODO
-        return None
-
-def valid_input(raw_data):
-    try:
-        raw_data = [int(hero_id) for hero_id in raw_data]
-    except:
-        return False, 'ERROR: hero id must be digit.'
-    if not len(set(raw_data)) in [10, 20]:
-        return False, 'ERROR: duplicate hero id.'
-    for h in raw_data:
-        if not h in hero_ids:
-            return False, 'ERROR: invalid hero id.'
-    return True, raw_data
-
-
 @app.route('/')
 def demo():
-    return render_template("demo.html")
+    return render_template("demo.html",hero_mapping = hero_mapping, inverse_hero_mapping = inverse_hero_mapping)
 
-@app.route('/prediction/',methods=['POST'])
-def dataHandler():
-    
+@app.route('/predict', methods=['POST'])
+def predict():
     # do check to validate data input
-    print(request.json)
     valid, res = valid_input(list(request.json))
     if not valid:
         return res
@@ -71,8 +23,53 @@ def dataHandler():
         if feature is None:
             return "ERROR: fail to generate feature, input format is not supported."
         else:
-            y = lr_model_without_ban.predict(feature)
-            return str(y[0])
+            prob = model.predict_proba(feature)[0]
+            # 0: team 0 win, 1: team 1 win
+            # prob: 概率
+            ret_val = dict()
+            ret_val[0] = prob[0]
+            ret_val[1] = prob[1]
+            return ret_val
+
+@app.route('/recommend', methods=['POST'])
+def recommend():
+    # recommend中request里面需要填充一个-1，-1的意思是该英雄没有选，需要推荐
+    # 这里没有做一些完善的检查，所以测试的时候需要保证输入的正确性
+    idx = -1
+    raw_data = list(request.input)
+    for i, id_str in list(request.json):
+        if id_str == '-1':
+            idx = i
+            break
+    if idx == -1:
+        return "ERROR: illegal input."
+    
+    predict_side = 0 if idx < 5 else 1
+    hero_2_prob = dict()
+    max_prob = 0
+    recommended_hero_id = -1
+    for hero_id in hero_ids:
+        raw_data[idx] = str(hero_id)
+        valid, current_data = valid_input(raw_data)
+        if not valid:
+            continue
+        feature = data_to_feature(current_data)
+        prob = model.predict_proba(feature)[predict_side]
+        hero_2_prob[hero_id] = prob
+        if prob > max_prob:
+            recommended_hero_id = hero_id
+            max_prob = prob
+    ret_val = dict()
+    ret_val['hero_id'] = recommended_hero_id
+    ret_val['hero_name'] = hero_mapping[recommended_hero_id]
+    return ret_val
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+
+    # site initialization
+    config = load_site_config('./project/resources/site_config.json')
+    hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
+    model = load_pretrained_model(config['model_path'])
+
+    app.run(debug=True)

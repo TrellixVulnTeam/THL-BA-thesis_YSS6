@@ -5,6 +5,10 @@
     <title>Prediction demo</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
     <script src="{{url_for('static',filename='controls.js')}}"></script>
+    <script>
+        var hero_mapping = '{{hero_mapping|tojson}}'
+        var inverse_hero_mapping = '{{inverse_hero_mapping|tojson}}'
+    </script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 

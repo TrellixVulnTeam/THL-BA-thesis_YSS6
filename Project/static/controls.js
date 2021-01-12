@@ -17,12 +17,12 @@ function saveData() {
 function predict() {
     //console.log(picks);
     $.ajax({
-        url: "/prediction/",
+        url: "/predict",
         type: "POST",
         data: JSON.stringify(picks),
         contentType: 'application/json',
         success: function (res) {
-            alert(res)
+            console.log(res)
         }
     });
 }

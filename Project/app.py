@@ -1,16 +1,15 @@
 from flask import Flask, render_template, url_for, request, jsonify
-from utils import load_site_config, load_hero_mapping, load_pretrained_model, valid_input, data_to_feature
-from utils import combine_list, hero_ids
+from models.model import load_site_config, load_hero_mapping, load_pretrained_model, valid_input, data_to_feature
+from models.model import combine_list, hero_ids
 from itertools import product
 import numpy as np
-import pickle
 
 app = Flask(__name__,static_folder='./static')
 
 
 @app.route('/')
 def demo():
-    return render_template("demo.html",hero_mapping = hero_mapping, inverse_hero_mapping = inverse_hero_mapping)
+    return render_template("home.html",hero_mapping = hero_mapping, inverse_hero_mapping = inverse_hero_mapping)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -68,7 +67,7 @@ def recommend():
 if __name__ == '__main__':
 
     # site initialization
-    config = load_site_config('./project/resources/site_config.json')
+    config = load_site_config('Project/models/site_config.json')
     hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
     model = load_pretrained_model(config['model_path'])
 

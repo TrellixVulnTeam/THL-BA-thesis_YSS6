@@ -1,47 +1,140 @@
-.team_0 {
+/* Fonts quote */
+@font-face {
+    font-family: Audrey;
+    src: url(../static/font/Audrey-Normal.otf) format('truetype');
+}
+
+@font-face {
+    font-family: Gotham-Light;
+    src: url(../static/font/Gotham-Light-Regular.otf) format('truetype');
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Gotham-Light;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-image: url('./img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.navi_bar {
+    position: relative;
+
+    width: 100%;
+    height: 64px;
+    background-image: url('./img/navi_bar.png');
+    white-space: nowrap;
+}
+
+.header {
+    display: inline-block;
+    position: relative;
+    left: 20%;
+}
+
+.header_img {
+    top: -7%;
+
+    width: 180px;
+    height: 45px;
+}
+
+.header_seperator {
+    margin-left: 15px;
+    margin-right: 20px;
+    top: -21%;
+
+    color: #4f4c49;
+}
+
+.header_script {
+    top: -15%;
+
+    width: 400px;
+    height: 50px;
+    color: rgb(199, 199, 199);
+    text-align: left;
+}
+
+.simulator {
     /* Location */
     position: relative;
     margin: auto;
     left: 0;
     right: 0;
+    top: 7%;
 
     /* Style */
-    width: 70%;
-    height: 350px;
-    box-shadow: 0 0 2px 1px rgba(240, 240, 240, 0.8) inset,
-        0 .5em rgba(230, 230, 230, 0);
-    text-align: center;
+    width: 100%;
+    height: 75%;
 }
 
-.team_1 {
+.team_name {
+    margin-top: 1.5%;
+    margin-left: 1.5%;
+    margin-bottom: 0;
+
+    height: 5%;
+}
+
+.team_radiant {
     /* Location */
-    position: relative;
+    position: absolute;
     margin: auto;
     left: 0;
     right: 0;
+    top: 0;
 
     /* Style */
-    width: 70%;
-    height: 350px;
-    box-shadow: 0 0 2px 1px rgba(240, 240, 240, 0.8) inset,
-        0 .5em rgba(230, 230, 230, 0);
-    text-align: center;
+    width: 60%;
+    height: 45%;
+    background-color: rgba(185, 185, 185, 0.75);
+    border-radius: 10px;
 }
 
-#saveButton{
+.team_dire {
+    /* Location */
     position: absolute;
     margin: auto;
-    left:0;
-    right:0;
-    top: 720px;
-    width: 200px;
+    left: 0;
+    right: 0;
+    top: 55%;
+
+    /* Style */
+    width: 60%;
+    height: 45%;
+    background-color: rgba(185, 185, 185, 0.75);
+    border-radius: 10px;
 }
 
-#predictButton{
+.button_list {
     position: absolute;
     margin: auto;
-    left:0;
-    right:0;
-    top: 745px;
-    width: 200px;
+    margin-top: 1.5%;
+    left: 0;
+    right: 0;
+
+    width: 97%;
+    height: 85%;
+    font-size: 0;
+}
+
+.pick {
+    margin-left: 1.25%;
+
+    width: 19%;
+    height: 90%;
+}
+
+#pick_1,
+#pick_6 {
+    margin-left: 0;
 }

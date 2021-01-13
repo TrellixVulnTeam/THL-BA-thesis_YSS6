@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dota 2 - Combat Simulator</title>
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon/favicon.ico')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+    <script src="{{url_for('static',filename='main.js')}}"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var hero_mapping = '{{hero_mapping|tojson}}'
+        var inverse_hero_mapping = '{{inverse_hero_mapping|tojson}}'
+    </script>
+</head>
+
+<body>
+    <div class="navi_bar">
+        <span class="header header_img"><img border='0' src='../static/img/header.png'></span>
+        <span class="header header_seperator">|</span>
+        <span class="header header_script"><h1>Combat Simulator</h1></span>
+    </div>
+    <div class="simulator">
+        <div class="team_radiant">
+            <p class="team_name">the Radiant</p>
+            <div class="button_list">
+                <button class="pick" id="pick_1"></button>
+                <button class="pick" id="pick_2"></button>
+                <button class="pick" id="pick_3"></button>
+                <button class="pick" id="pick_4"></button>
+                <button class="pick" id="pick_5"></button>
+            </div>
+        </div>
+        <div class="team_dire">
+            <p class="team_name">the Dire</p>
+            <div class="button_list">
+                <button class="pick" id="pick_6"></button>
+                <button class="pick" id="pick_7"></button>
+                <button class="pick" id="pick_8"></button>
+                <button class="pick" id="pick_9"></button>
+                <button class="pick" id="pick_10"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

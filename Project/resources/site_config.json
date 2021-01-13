@@ -1,4 +1,0 @@
-{
-    "hero_mapping_path": "./project/resources/hero_mapping.json",
-    "model_path": "./project/model/lr_model_top10_combine_without_ban.pkl"
-}

@@ -3,42 +3,168 @@
 
 <head>
     <title>Dota 2 - Combat Simulator</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{url_for('static',filename='main.js')}}"></script>
     <link rel="shortcut icon" href="{{url_for('static',filename='favicon/favicon.ico')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
-    <script src="{{url_for('static',filename='main.js')}}"></script>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script>
-        var hero_mapping = '{{hero_mapping|tojson}}'
-        var inverse_hero_mapping = '{{inverse_hero_mapping|tojson}}'
-    </script>
 </head>
 
 <body>
     <div class="navi_bar">
         <span class="header header_img"><img border='0' src='../static/img/header.png'></span>
         <span class="header header_seperator">|</span>
-        <span class="header header_script"><h1>Combat Simulator</h1></span>
+        <span class="header header_script">
+            <h1>Combat Simulator</h1>
+        </span>
     </div>
     <div class="simulator">
         <div class="team_radiant">
             <p class="team_name">the Radiant</p>
             <div class="button_list">
-                <button class="pick" id="pick_1"></button>
-                <button class="pick" id="pick_2"></button>
-                <button class="pick" id="pick_3"></button>
-                <button class="pick" id="pick_4"></button>
-                <button class="pick" id="pick_5"></button>
+                <div class="drop_down_button" style="margin-left: 0;"><button class="pick" id="pick_1"
+                        onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_2" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_3" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_4" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_5" onclick="showMenu(this)"></button></div>
             </div>
         </div>
         <div class="team_dire">
             <p class="team_name">the Dire</p>
             <div class="button_list">
-                <button class="pick" id="pick_6"></button>
-                <button class="pick" id="pick_7"></button>
-                <button class="pick" id="pick_8"></button>
-                <button class="pick" id="pick_9"></button>
-                <button class="pick" id="pick_10"></button>
+                <div class="drop_down_button" style="margin-left: 0;"><button class="pick" id="pick_6"
+                        onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_7" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_8" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_9" onclick="showMenu(this)"></button></div>
+                <div class="drop_down_button"><button class="pick" id="pick_10" onclick="showMenu(this)"></button></div>
             </div>
+        </div>
+        <script>
+            var hero_mapping_str = '{{hero_mapping|tojson}}'
+            var hero_mapping_json = JSON.parse(hero_mapping_str)
+        </script>
+        <div class="drop_down_menu" id='menu'>
+            <button id= 'Abaddon' onclick="selectHero(this,hero_mapping_json.Abaddon)">Abaddon</button>
+            <button>Alchemist</button>
+            <button>Ancient Apparition</button>
+            <button>Anti-Mage</button>
+            <button>Arc Warden</button>
+            <button>Axe</button>
+            <button>Bane</button>
+            <button>Batrider</button>
+            <button>Beastmaster</button>
+            <button>Bloodseeker</button>
+            <button>Bounty Hunter</button>
+            <button>Brewmaster</button>
+            <button>Bristleback</button>
+            <button>Broodmother</button>
+            <button>Centaur Warrunner</button>
+            <button>Chaos Knight</button>
+            <button>Chen</button>
+            <button>Clinkz</button>
+            <button>Clockwerk</button>
+            <button>Crystal Maiden</button>
+            <button>Dark Seer</button>
+            <button>Dark Willow</button>
+            <button>Dazzle</button>
+            <button>Death Prophet</button>
+            <button>Disruptor</button>
+            <button>Doom</button>
+            <button>Dragon Knight</button>
+            <button>Drow Ranger</button>
+            <button>Earth Spirit</button>
+            <button>Earthshaker</button>
+            <button>Elder Titan</button>
+            <button>Ember Spirit</button>
+            <button>Enchantress</button>
+            <button>Enigma</button>
+            <button>Faceless Void</button>
+            <button>Grimstroke</button>
+            <button>Gyrocopter</button>
+            <button>Hoodwink</button>
+            <button>Huskar</button>
+            <button>Invoker</button>
+            <button>Io</button>
+            <button>Jakiro</button>
+            <button>Juggernaut</button>
+            <button>Keeper of the Light</button>
+            <button>Kunkka</button>
+            <button>Legion Commander</button>
+            <button>Leshrac</button>
+            <button>Lich</button>
+            <button>Lifestealer</button>
+            <button>Lina</button>
+            <button>Lion</button>
+            <button>Lone Druid</button>
+            <button>Luna</button>
+            <button>Lycan</button>
+            <button>Magnus</button>
+            <button>Mars</button>
+            <button>Medusa</button>
+            <button>Meepo</button>
+            <button>Mirana</button>
+            <button>Monkey King</button>
+            <button>Morphling</button>
+            <button>Naga Siren</button>
+            <button>Nature's Prophet</button>
+            <button>Necrophos</button>
+            <button>Night Stalker</button>
+            <button>Nyx Assassin</button>
+            <button>Ogre Magi</button>
+            <button>Omniknight</button>
+            <button>Oracle</button>
+            <button>Outworld Destroyer</button>
+            <button>Pangolier</button>
+            <button>Phantom Assassin</button>
+            <button>Phantom Lancer</button>
+            <button>Phoenix</button>
+            <button>Puck</button>
+            <button>Pudge</button>
+            <button>Pugna</button>
+            <button>Queen of Pain</button>
+            <button>Razor</button>
+            <button>Riki</button>
+            <button>Rubick</button>
+            <button>Sand King</button>
+            <button>Shadow Demon</button>
+            <button>Shadow Fiend</button>
+            <button>Shadow Shaman</button>
+            <button>Silencer</button>
+            <button>Skywrath Mage</button>
+            <button>Slardar</button>
+            <button>Slark</button>
+            <button>Snapfire</button>
+            <button>Sniper</button>
+            <button>Spectre</button>
+            <button>Spirit Breaker</button>
+            <button>Storm Spirit</button>
+            <button>Sven</button>
+            <button>Techies</button>
+            <button>Templar Assassin</button>
+            <button>Terrorblade</button>
+            <button>Tidehunter</button>
+            <button>Timbersaw</button>
+            <button>Tinker</button>
+            <button>Tiny</button>
+            <button>Treant Protector</button>
+            <button>Troll Warlord</button>
+            <button>Tusk</button>
+            <button>Underlord</button>
+            <button>Undying</button>
+            <button>Ursa</button>
+            <button>Vengeful Spirit</button>
+            <button>Venomancer</button>
+            <button>Viper</button>
+            <button>Visage</button>
+            <button>Void Spirit</button>
+            <button>Warlock</button>
+            <button>Weaver</button>
+            <button>Windranger</button>
+            <button>Winter Wyvern</button>
+            <button>Witch Doctor</button>
+            <button>Wraith King</button>
+            <button>Zeus</button>
         </div>
     </div>
 </body>

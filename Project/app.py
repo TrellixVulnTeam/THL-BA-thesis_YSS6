@@ -9,7 +9,7 @@ app = Flask(__name__,static_folder='./static')
 
 @app.route('/')
 def demo():
-    return render_template("home.html",hero_mapping = hero_mapping, inverse_hero_mapping = inverse_hero_mapping)
+    return render_template("home.html",hero_mapping = hero_mapping)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     # site initialization
     config = load_site_config('Project/models/site_config.json')
-    hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
+    hero_mapping = load_hero_mapping(config['hero_mapping_path'])
     model = load_pretrained_model(config['model_path'])
 
     app.run(debug=True)

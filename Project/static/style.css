@@ -75,6 +75,7 @@ body {
     /* Style */
     width: 100%;
     height: 75%;
+    font-size: 0;
 }
 
 .team_name {
@@ -83,6 +84,7 @@ body {
     margin-bottom: 0;
 
     height: 5%;
+    font-size: initial;
 }
 
 .team_radiant {
@@ -124,17 +126,43 @@ body {
 
     width: 97%;
     height: 85%;
-    font-size: 0;
 }
 
-.pick {
+.drop_down_button {
+    display: inline-block;
+    position: relative;
     margin-left: 1.25%;
 
     width: 19%;
     height: 90%;
+    white-space: nowrap;
 }
 
-#pick_1,
-#pick_6 {
-    margin-left: 0;
+.pick {
+    width: 100%;
+    height: 100%;
+}
+
+.drop_down_menu {
+    display: none;
+    position: absolute;
+    left: 80%;
+    top: -5%;
+
+    width: 140%;
+    height: 110%;
+    z-index: 999;
+    overflow-y: scroll;
+}
+
+.drop_down_menu button {
+    display: block;
+
+    width: 100%;
+    min-width: 130px;
+    text-align: left;
+}
+
+.show{
+    display: block;
 }

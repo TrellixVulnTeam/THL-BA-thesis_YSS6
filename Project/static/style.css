@@ -21,8 +21,8 @@ body {
     padding: 0;
 
     background-image: url('./img/background.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-repeat: repeat;
+    white-space: nowrap;
 }
 
 .navi_bar {
@@ -31,7 +31,6 @@ body {
     width: 100%;
     height: 64px;
     background-image: url('./img/navi_bar.png');
-    white-space: nowrap;
 }
 
 .header {
@@ -78,15 +77,6 @@ body {
     font-size: 0;
 }
 
-.team_name {
-    margin-top: 1.5%;
-    margin-left: 1.5%;
-    margin-bottom: 0;
-
-    height: 5%;
-    font-size: initial;
-}
-
 .team_radiant {
     /* Location */
     position: absolute;
@@ -100,6 +90,35 @@ body {
     height: 45%;
     background-color: rgba(185, 185, 185, 0.75);
     border-radius: 10px;
+}
+
+.function_button{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 45%;
+
+    width: 60%;
+    height: 10%;
+}
+
+.predict{
+    position: absolute;
+    left: 20%;
+    top: 30%;
+
+    width: 20%;
+    height: 40%;
+}
+
+.recommend{
+    position: absolute;
+    left: 60%;
+    top: 30%;
+
+    width: 20%;
+    height: 40%;
 }
 
 .team_dire {
@@ -117,6 +136,15 @@ body {
     border-radius: 10px;
 }
 
+.team_name {
+    margin-top: 1.5%;
+    margin-left: 1.5%;
+    margin-bottom: 0;
+
+    height: 5%;
+    font-size: initial;
+}
+
 .button_list {
     position: absolute;
     margin: auto;
@@ -128,41 +156,43 @@ body {
     height: 85%;
 }
 
-.drop_down_button {
+.button_container {
     display: inline-block;
     position: relative;
     margin-left: 1.25%;
 
     width: 19%;
     height: 90%;
-    white-space: nowrap;
+    overflow: hidden;
 }
 
 .pick {
+    position: relative;
+
     width: 100%;
     height: 100%;
+    white-space: normal;
 }
 
-.drop_down_menu {
-    display: none;
+.menu {
+    display: block;
     position: absolute;
-    left: 80%;
-    top: -5%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
 
-    width: 140%;
-    height: 110%;
+    width: 30%;
+    height: 40%;
     z-index: 999;
     overflow-y: scroll;
+    visibility: hidden;
 }
 
-.drop_down_menu button {
+.menu button {
     display: block;
 
     width: 100%;
     min-width: 130px;
     text-align: left;
-}
-
-.show{
-    display: block;
 }

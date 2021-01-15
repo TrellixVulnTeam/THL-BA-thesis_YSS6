@@ -92,7 +92,7 @@ body {
     border-radius: 10px;
 }
 
-.function_button{
+.function_button {
     position: absolute;
     margin: auto;
     left: 0;
@@ -103,7 +103,7 @@ body {
     height: 10%;
 }
 
-.predict{
+.predict {
     position: absolute;
     left: 20%;
     top: 30%;
@@ -112,7 +112,7 @@ body {
     height: 40%;
 }
 
-.recommend{
+.recommend {
     position: absolute;
     left: 60%;
     top: 30%;

@@ -1,4 +1,4 @@
-var picks = new Array(10);
+var picks = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
 
 window.onclick = function (event) {
     if (!event.target.matches('.pick')) {
@@ -12,12 +12,49 @@ function showMenu(element) {
     $('.menu').css('visibility', 'visible');
 }
 
-function selectHero(element, hero_id) {
+function reset(element) {
+    var pick_button_id = element.id;
+    var index = parseInt(pick_button_id[5]);
+
+    picks[index] = -1;
+    document.getElementById(pick_button_id).innerHTML = '';
+}
+
+var click_timeout = 0;
+
+function clickEvent(event) {
+    var click_time = event.originalEvent.detail;
+    var pick_button = this;
+
+    if (click_timeout) {
+        clearTimeout(click_timeout);
+        click_timeout = 0;
+    }
+
+    switch (click_time) {
+        case 1:
+            click_timeout = setTimeout(function () {
+                showMenu(pick_button)
+            }, 200);
+            break;
+        case 2:
+            reset(pick_button);
+            break;
+    }
+}
+
+$(document).ready(function () {
+    $('.pick').on('click', clickEvent);
+});
+
+function selectHero(element, hero_mapping) {
+    var hero_name = $(element).text();
+    var hero_id = hero_mapping[hero_name];
+
     var pick_button_id = $(element).parent()[0].id;
     var index = parseInt(pick_button_id[5]);
-    picks[index] = hero_id;
 
-    var hero_name = $(element)[0].id
+    picks[index] = hero_id;
     document.getElementById(pick_button_id).innerHTML = hero_name;
 }
 
@@ -44,6 +81,18 @@ function predict() {
             } else {
                 alert(res);
             }
+        }
+    });
+}
+
+function recommend(){
+    $.ajax({
+        url: "/recommend",
+        type: "POST",
+        data: JSON.stringify(picks),
+        contentType: 'application/json',
+        success: function (res) {
+            console.log(res);
         }
     });
 }

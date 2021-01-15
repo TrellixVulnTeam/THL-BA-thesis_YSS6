@@ -59,7 +59,6 @@ function selectHero(element, hero_mapping) {
 }
 
 function predict() {
-    //console.log(picks);
     $.ajax({
         url: "/predict",
         type: "POST",
@@ -71,6 +70,9 @@ function predict() {
                 var prob_dire = res[1];
                 var team_radiant = $('.team_radiant');
                 var team_dire = $('.team_dire');
+
+                console.log(res);
+
                 if (prob_radiant > prob_dire) {
                     team_radiant.css('background-color', 'rgb(143, 188, 143)');
                     team_dire.css('background-color', 'rgb(200, 80, 80)');
@@ -92,7 +94,7 @@ function recommend(){
         data: JSON.stringify(picks),
         contentType: 'application/json',
         success: function (res) {
-            console.log(res);
+            alert('Recommendation: Try '+res['hero_name']);
         }
     });
 }

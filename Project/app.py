@@ -35,9 +35,9 @@ def recommend():
     # recommend中request里面需要填充一个-1，-1的意思是该英雄没有选，需要推荐
     # 这里没有做一些完善的检查，所以测试的时候需要保证输入的正确性
     idx = -1
-    raw_data = list(request.input)
-    for i, id_str in list(request.json):
-        if id_str == '-1':
+    raw_data = list(request.json)
+    for i, id_str in enumerate(list(request.json)):
+        if id_str == -1:
             idx = i
             break
     if idx == -1:
@@ -53,14 +53,14 @@ def recommend():
         if not valid:
             continue
         feature = data_to_feature(current_data)
-        prob = model.predict_proba(feature)[predict_side]
+        prob = model.predict_proba(feature)[0,predict_side]
         hero_2_prob[hero_id] = prob
         if prob > max_prob:
             recommended_hero_id = hero_id
             max_prob = prob
     ret_val = dict()
     ret_val['hero_id'] = recommended_hero_id
-    ret_val['hero_name'] = hero_mapping[recommended_hero_id]
+    ret_val['hero_name'] = inverse_hero_mapping[recommended_hero_id]
     return ret_val
 
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     # site initialization
     config = load_site_config('Project/models/site_config.json')
-    hero_mapping = load_hero_mapping(config['hero_mapping_path'])
+    hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
     model = load_pretrained_model(config['model_path'])
 
     app.run(debug=True)

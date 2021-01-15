@@ -17,11 +17,13 @@ def load_hero_mapping(mapping_file_folder):
     with open(mapping_file_folder, 'r') as fp:
         hero_meta = json.load(fp)
         hero_mapping = dict()
+        inverse_hero_mapping = dict()
     for hero in hero_meta:
         hero_id = hero['id']
         hero_name = hero['localized_name']
         hero_mapping[hero_name] = hero_id
-    return hero_mapping
+        inverse_hero_mapping[hero_id] = hero_name
+    return hero_mapping, inverse_hero_mapping
 
 def load_pretrained_model(model_file_folder):
     lr_model_without_ban = pickle.load(open(model_file_folder, 'rb'))

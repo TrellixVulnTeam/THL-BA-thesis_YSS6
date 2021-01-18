@@ -19,21 +19,15 @@ def predict():
         return res
     else:
         feature = data_to_feature(res)
-        if feature is None:
-            return "ERROR: fail to generate feature, input format is not supported."
-        else:
-            prob = model.predict_proba(feature)[0]
-            # 0: team 0 win, 1: team 1 win
-            # prob: 概率
-            ret_val = dict()
-            ret_val[0] = prob[0]
-            ret_val[1] = prob[1]
-            return ret_val
+        prob = model.predict_proba(feature)[0]
+        # prob: probabilities
+        ret_val = dict()
+        ret_val[0] = prob[0]
+        ret_val[1] = prob[1]
+        return ret_val
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
-    # recommend中request里面需要填充一个-1，-1的意思是该英雄没有选，需要推荐
-    # 这里没有做一些完善的检查，所以测试的时候需要保证输入的正确性
     idx = -1
     raw_data = list(request.json)
     for i, id_str in enumerate(list(request.json)):

@@ -12,7 +12,18 @@ function showMenu(element) {
     $('.menu').css('visibility', 'visible');
 }
 
-function reset(element) {
+function selectHero(element, hero_mapping) {
+    var hero_name = $(element).text();
+    var hero_id = hero_mapping[hero_name];
+
+    var pick_button_id = $(element).parent()[0].id;
+    var index = parseInt(pick_button_id[5]);
+
+    picks[index] = hero_id;
+    document.getElementById(pick_button_id).innerHTML = hero_name;
+}
+
+function resetHero(element) {
     var pick_button_id = element.id;
     var index = parseInt(pick_button_id[5]);
 
@@ -38,7 +49,7 @@ function clickEvent(event) {
             }, 200);
             break;
         case 2:
-            reset(pick_button);
+            resetHero(pick_button);
             break;
     }
 }
@@ -46,17 +57,6 @@ function clickEvent(event) {
 $(document).ready(function () {
     $('.pick').on('click', clickEvent);
 });
-
-function selectHero(element, hero_mapping) {
-    var hero_name = $(element).text();
-    var hero_id = hero_mapping[hero_name];
-
-    var pick_button_id = $(element).parent()[0].id;
-    var index = parseInt(pick_button_id[5]);
-
-    picks[index] = hero_id;
-    document.getElementById(pick_button_id).innerHTML = hero_name;
-}
 
 function predict() {
     $.ajax({
@@ -95,6 +95,7 @@ function recommend(){
         contentType: 'application/json',
         success: function (res) {
             alert('Recommendation: Try '+res['hero_name']);
+            console.log(res['hero_name']);
         }
     });
 }

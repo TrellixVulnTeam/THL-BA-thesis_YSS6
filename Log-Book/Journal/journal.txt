@@ -1,0 +1,41 @@
+machine learning tutorial
+分类问题
+特征工程
+https://www.opendota.com/matches
+
+模型搭建：
+数据
+定义输入格式--第一层pipe line
+定义特征--第二层pipe line
+
+玩家能力 英雄组合 克制关系
+
+多个模型做一件事情
+随机森林* sci-kit learn SVM和Random Forest
+bagging 模型融合
+
+流程-->迭代
+
+模型的评价
+
+网站特征
+动态调整 输赢概率
+
+help tips 选英雄时出现提示，在用户输入英雄后
+胜率最高的选择，和选择英雄后的胜率
+英雄选完后的整体胜率
+
+选取率--胜率
+artificial coach
+
+演讲技巧
+flow chart
+icons details
+不要结果，要过程
+engagement，example
+
+why it use
+how it work
+
+feature engineering, data mining提前到2.2
+feature engineering 章节赘述三种算法的计算结果，从优择一

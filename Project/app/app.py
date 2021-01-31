@@ -61,8 +61,8 @@ def recommend():
 if __name__ == '__main__':
 
     # site initialization
-    config = load_site_config('Project/models/site_config.json')
+    config = load_site_config('App/models/site_config.json')
     hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
     model = load_pretrained_model(config['model_path'])
-
+    
     app.run(debug=True)

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, jsonify
-from models.model import load_site_config, load_hero_mapping, load_pretrained_model, valid_input, data_to_feature
-from models.model import combine_list, hero_ids
+from model.model import load_site_config, load_hero_mapping, load_pretrained_model, valid_input, data_to_feature
+from model.model import combine_list, hero_ids
 from itertools import product
 import numpy as np
 
@@ -61,7 +61,7 @@ def recommend():
 if __name__ == '__main__':
 
     # site initialization
-    config = load_site_config('App/models/site_config.json')
+    config = load_site_config('App/model/site_config.json')
     hero_mapping, inverse_hero_mapping = load_hero_mapping(config['hero_mapping_path'])
     model = load_pretrained_model(config['model_path'])
     

@@ -1,0 +1,198 @@
+/* Fonts quote */
+@font-face {
+    font-family: Audrey;
+    src: url(../static/font/Audrey-Normal.otf) format('truetype');
+}
+
+@font-face {
+    font-family: Gotham-Light;
+    src: url(../static/font/Gotham-Light-Regular.otf) format('truetype');
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Gotham-Light;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-image: url('./img/background.jpg');
+    background-repeat: repeat;
+    white-space: nowrap;
+}
+
+.navi_bar {
+    position: relative;
+
+    width: 100%;
+    height: 64px;
+    background-image: url('./img/navi_bar.png');
+}
+
+.header {
+    display: inline-block;
+    position: relative;
+    left: 20%;
+}
+
+.header_img {
+    top: -7%;
+
+    width: 180px;
+    height: 45px;
+}
+
+.header_seperator {
+    margin-left: 15px;
+    margin-right: 20px;
+    top: -21%;
+
+    color: #4f4c49;
+}
+
+.header_script {
+    top: -15%;
+
+    width: 400px;
+    height: 50px;
+    color: rgb(199, 199, 199);
+    text-align: left;
+}
+
+.simulator {
+    /* Location */
+    position: relative;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 7%;
+
+    /* Style */
+    width: 100%;
+    height: 75%;
+    font-size: 0;
+}
+
+.team_radiant {
+    /* Location */
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    /* Style */
+    width: 60%;
+    height: 45%;
+    background-color: rgba(185, 185, 185, 0.75);
+    border-radius: 10px;
+}
+
+.function_button {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 45%;
+
+    width: 60%;
+    height: 10%;
+}
+
+.predict {
+    position: absolute;
+    left: 20%;
+    top: 30%;
+
+    width: 20%;
+    height: 40%;
+}
+
+.recommend {
+    position: absolute;
+    left: 60%;
+    top: 30%;
+
+    width: 20%;
+    height: 40%;
+}
+
+.team_dire {
+    /* Location */
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 55%;
+
+    /* Style */
+    width: 60%;
+    height: 45%;
+    background-color: rgba(185, 185, 185, 0.75);
+    border-radius: 10px;
+}
+
+.team_name {
+    margin-top: 1.5%;
+    margin-left: 1.5%;
+    margin-bottom: 0;
+
+    height: 5%;
+    font-size: initial;
+}
+
+.button_list {
+    position: absolute;
+    margin: auto;
+    margin-top: 1.5%;
+    left: 0;
+    right: 0;
+
+    width: 97%;
+    height: 85%;
+}
+
+.button_container {
+    display: inline-block;
+    position: relative;
+    margin-left: 1.25%;
+
+    width: 19%;
+    height: 90%;
+    overflow: hidden;
+}
+
+.pick {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    white-space: normal;
+}
+
+.menu {
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    width: 30%;
+    height: 40%;
+    z-index: 999;
+    overflow-y: scroll;
+    visibility: hidden;
+}
+
+.menu button {
+    display: block;
+
+    width: 100%;
+    min-width: 130px;
+    text-align: left;
+}

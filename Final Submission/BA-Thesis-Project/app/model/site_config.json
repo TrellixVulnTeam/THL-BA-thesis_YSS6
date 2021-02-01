@@ -1,0 +1,4 @@
+{
+    "hero_mapping_path": "App/model/hero_stats/hero_mapping.json",
+    "model_path": "App/model/lr_model/lr_model_top10_combine_without_ban.pkl"
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dota 2 - Combat Simulator</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{url_for('static',filename='main.js')}}"></script>
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon/favicon.ico')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+
+<body>
+    <div class="navi_bar">
+        <span class="header header_img"><img border='0' src='../static/img/header.png'></span>
+        <span class="header header_seperator">|</span>
+        <span class="header header_script">
+            <h1>Combat Simulator</h1>
+        </span>
+    </div>
+    <div class="simulator">
+        <div class="team_radiant">
+            <p class="team_name">the Radiant</p>
+            <div class="button_list">
+                <div class="button_container" style="margin-left: 0;"><button class="pick" id="pick_0"></button></div>
+                <div class="button_container"><button class="pick" id="pick_1"></button></div>
+                <div class="button_container"><button class="pick" id="pick_2"></button></div>
+                <div class="button_container"><button class="pick" id="pick_3"></button></div>
+                <div class="button_container"><button class="pick" id="pick_4"></button></div>
+            </div>
+        </div>
+        <div class="function_button">
+            <button class="predict" onclick="predict()">Predict</button>
+            <button class="recommend" onclick="recommend()">Recommend</button>
+        </div>
+        <div class="team_dire">
+            <p class="team_name">the Dire</p>
+            <div class="button_list">
+                <div class="button_container" style="margin-left: 0;"><button class="pick" id="pick_5"></button></div>
+                <div class="button_container"><button class="pick" id="pick_6"></button></div>
+                <div class="button_container"><button class="pick" id="pick_7"></button></div>
+                <div class="button_container"><button class="pick" id="pick_8"></button></div>
+                <div class="button_container"><button class="pick" id="pick_9"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var hero_mapping_str = '{{hero_mapping|tojson}}';
+        var hero_mapping_json = JSON.parse(hero_mapping_str);
+
+        function parseMapping(hero_mapping) {
+            return hero_mapping;
+        }
+    </script>
+    <div class="menu">
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Abaddon</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Alchemist</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Ancient Apparition</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Anti-Mage</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Arc Warden</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Axe</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Bane</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Batrider</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Beastmaster</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Bloodseeker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Bounty Hunter</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Brewmaster</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Bristleback</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Broodmother</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Centaur Warrunner</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Chaos Knight</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Chen</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Clinkz</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Clockwerk</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Crystal Maiden</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Dark Seer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Dark Willow</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Dazzle</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Death Prophet</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Disruptor</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Doom</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Dragon Knight</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Drow Ranger</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Earth Spirit</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Earthshaker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Elder Titan</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Ember Spirit</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Enchantress</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Enigma</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Faceless Void</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Grimstroke</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Gyrocopter</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Huskar</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Invoker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Io</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Jakiro</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Juggernaut</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Keeper of the Light</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Kunkka</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Legion Commander</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Leshrac</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lich</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lifestealer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lina</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lion</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lone Druid</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Luna</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Lycan</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Magnus</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Mars</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Medusa</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Meepo</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Mirana</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Monkey King</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Morphling</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Naga Siren</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Nature's Prophet</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Necrophos</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Night Stalker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Nyx Assassin</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Ogre Magi</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Omniknight</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Oracle</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Outworld Destroyer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Pangolier</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Phantom Assassin</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Phantom Lancer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Phoenix</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Puck</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Pudge</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Pugna</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Queen of Pain</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Razor</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Riki</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Rubick</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Sand King</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Shadow Demon</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Shadow Fiend</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Shadow Shaman</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Silencer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Skywrath Mage</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Slardar</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Slark</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Snapfire</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Sniper</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Spectre</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Spirit Breaker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Storm Spirit</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Sven</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Techies</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Templar Assassin</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Terrorblade</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Tidehunter</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Timbersaw</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Tinker</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Tiny</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Treant Protector</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Troll Warlord</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Tusk</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Underlord</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Undying</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Ursa</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Vengeful Spirit</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Venomancer</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Viper</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Visage</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Void Spirit</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Warlock</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Weaver</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Windranger</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Winter Wyvern</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Witch Doctor</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Wraith King</button>
+        <button onclick="selectHero(this,parseMapping(hero_mapping_json))">Zeus</button>
+    </div>
+</body>
+
+</html>

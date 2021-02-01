@@ -1,3 +1,4 @@
+from config import config
 from spider import spider
 import pandas as pd
 import json, pickle, traceback, os
@@ -29,13 +30,10 @@ def getMatchesDetail(request, url):
 
 def main():
     Config = config('conf/config.ini')
-    FindMatchesUrl = Config.getFindMatchesUrl()
     MatchesDetailBaseUrl = Config.getMatchesUrl()
-    ParsedMatchesUrl = Config.getParsedMatchesUrl()
     
     Requst = spider()
     #get parsed matches id
-    JsonMatches = Requst.GET(ParsedMatchesUrl)
     MatchesIds = readMatchIdFromFile('data/match_ids.data')
     AlreadyDoneIdFile = 'tmp/AlreadyDoneId.data'
     AlreadyDoneId = []
@@ -115,7 +113,7 @@ def get_mathes_data(f='data/matchesdata/5416234729.data'):
     #print(data)
     return data
 
-def main2():
+def main_sub():
     df = pd.DataFrame()
     count = 1
     for f in get_data_files('data/matchesdata'):
@@ -228,7 +226,7 @@ def saveAlreadyDoneIds(file_name, ids):
 if __name__ == '__main__':
     #test()
     #test2()
-    main2()
+    main()
     #testheroes()
     #get_match_ids()
     #print(readMatchIdFromFile('tmp/AlreadyDoneId.data'))
